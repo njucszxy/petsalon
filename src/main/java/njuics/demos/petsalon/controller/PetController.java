@@ -10,25 +10,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import njuics.demos.petsalon.model.Pet;
-import njuics.demos.petsalon.repository.PetRepository;
 
 @RestController
 public class PetController {
 
-	private final PetRepository repository;
+	private List pets = new ArrayList<Pet>();
 
-	PetController(PetRepository repository) {
-		this.repository = repository;
-	}
 
 	@GetMapping("/pets")
 	List<Pet> all() {
-		return repository.findAll();
+		return this.pets;
 	}
 
 	@PostMapping("/pets")
 	void newPet(@RequestBody Pet newPet) {
-		repository.save(newPet);
+		this.pets.add(newPet);
 	}
     
 }
